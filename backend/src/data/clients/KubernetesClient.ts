@@ -50,7 +50,7 @@ export class KubernetesClient {
       const { data } = await this.client.get<HorizontalPodAutoscalerList>(`/v1/namespaces/${this.accountNamespace}/horizontalpodautoscalers`, { params: options })
       return data
     } catch (error) {
-      throw new KubernetesAPIError(error?.response?.data ?? error.message)
+      throw new KubernetesAPIError(JSON.stringify(error?.response?.data) ?? error.message)
     }
   }
 }
