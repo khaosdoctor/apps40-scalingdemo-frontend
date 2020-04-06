@@ -1,6 +1,6 @@
 {
-  "name": "apps40-backend",
-  "version": "0.0.1",
+  "name": "visualization-backend",
+  "version": "0.0.2",
   "description": "Backend to the APPS40 GUI",
   "main": "dist/app.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:debug": "npm run clean && npm run build -- --sourceMap",
     "build:clean": "npm run clean && npm run build",
     "build:watch": "tsc -w",
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
     "start:debug": "tsc && concurrently -s all \"tsc -w\" \"DEBUG=expresso:* nodemon dist/app.js\"",
     "lint": "eslint src/**/*.ts"
   },
