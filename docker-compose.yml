@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  vhost:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./vhost.conf:/etc/nginx/conf.d/proxy_buffer_size.conf:ro
+
+  backend:
+    build: ./backend
+    environment:
+      VIRTUAL_HOST: k8sbackend.lvh.me
+    command: ["npm", "run", "start:debug"]
+    depends_on:
+      - vhost
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        ENV_API_URL: ${API_URL:-http://k8sbackend.lvh.me}
+    environment:
+      VIRTUAL_HOST: k8s.lvh.me
+    depends_on:
+      - backend
+
+volumes:
+  vhost.conf:
