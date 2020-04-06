@@ -5,9 +5,10 @@ export interface IAppConfig extends IExpressoConfigOptions {
   env: string,
   kubernetes: {
     kubernetesServiceHost: string | null
-    kubernetesServicePortHttps: number,
-    serviceAccountTokenPath: string,
+    kubernetesServicePortHttps: number
+    serviceAccountTokenPath: string
     serviceAccountNamespacePath: string
+    serviceAccountCertificatePath: string
   }
 }
 
@@ -19,6 +20,7 @@ export default {
     kubernetesServiceHost: process.env.KUBERNETES_SERVICE_HOST || null,
     kubernetesServicePortHttps: +(process.env.KUBERNETES_SERVICE_PORT_HTTPS || 443),
     serviceAccountTokenPath: process.env.KUBERNETES_SERVICEACCOUNT_TOKEN_PATH || '/var/run/secrets/kubernetes.io/serviceaccount/token',
-    serviceAccountNamespacePath: process.env.KUBERNETES_SERVICEACCOUNT_NAMESPACE_PATH || '/var/run/secrets/kubernetes.io/serviceaccount/namespace'
+    serviceAccountNamespacePath: process.env.KUBERNETES_SERVICEACCOUNT_NAMESPACE_PATH || '/var/run/secrets/kubernetes.io/serviceaccount/namespace',
+    serviceAccountCertificatePath: process.env.KUBERNETES_SERVICEACCOUNT_NAMESPACE_PATH || '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
   }
 } as IAppConfig

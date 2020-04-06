@@ -4,6 +4,7 @@ import { IAppConfig } from '../../app.config'
 import { DeploymentList } from './structures/DeploymentList'
 import { KubernetesAPIError } from '../../errors/KubernetesAPIError'
 import { HorizontalPodAutoscalerList } from './structures/HorizontalPodAutoscalerList'
+import https from 'https'
 
 export interface IKubernetesRequestOptions {
   watch: boolean
@@ -24,7 +25,15 @@ export class KubernetesClient {
     this.accountNamespace = fs.readFileSync(clientConfig.serviceAccountNamespacePath).toString('utf-8')
     this.k8sHost = clientConfig.kubernetesServiceHost
     this.k8sPort = clientConfig.kubernetesServicePortHttps
-    this.client = axios.create({ baseURL: `https://${this.k8sHost}:${this.k8sPort}/apis`, headers: { Authorization: `Bearer ${this.accountToken}` } })
+
+    const agent = new https.Agent({
+      ca: fs.readFileSync(clientConfig.serviceAccountCertificatePath)
+    })
+    this.client = axios.create({
+      baseURL: `https://${this.k8sHost}:${this.k8sPort}/apis`,
+      headers: { Authorization: `Bearer ${this.accountToken}` },
+      httpsAgent: agent
+    })
   }
 
   async getDeploymentList (options: IKubernetesRequestOptions): Promise<DeploymentList> {
