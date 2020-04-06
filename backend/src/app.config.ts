@@ -13,7 +13,7 @@ export interface IAppConfig extends IExpressoConfigOptions {
 
 export default {
   name: 'apps40',
-  port: +(process.env.PORT || 8080),
+  port: +(process.env.PORT || 3000),
   env: process.env.NODE_ENV || 'dev',
   kubernetes: {
     kubernetesServiceHost: process.env.KUBERNETES_SERVICE_HOST || null,

@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from 'axios'
 import { IAppConfig } from '../../app.config'
 import { DeploymentList } from './structures/DeploymentList'
 import { KubernetesAPIError } from '../../errors/KubernetesAPIError'
+import { HorizontalPodAutoscalerList } from './structures/HorizontalPodAutoscalerList'
 
 export interface IKubernetesRequestOptions {
   watch: boolean
@@ -33,6 +34,14 @@ export class KubernetesClient {
     } catch (error) {
       throw new KubernetesAPIError(error?.response?.data ?? error.message)
     }
+  }
 
+  async getHPAList (options: IKubernetesRequestOptions): Promise<HorizontalPodAutoscalerList> {
+    try {
+      const { data } = await this.client.get<HorizontalPodAutoscalerList>(`/v1/namespaces/${this.accountNamespace}/horizontalpodautoscalers`, { params: options })
+      return data
+    } catch (error) {
+      throw new KubernetesAPIError(error?.response?.data ?? error.message)
+    }
   }
 }

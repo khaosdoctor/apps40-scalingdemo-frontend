@@ -6,4 +6,8 @@ export class KubernetesService {
   async getDeploymentList (options: IKubernetesRequestOptions) {
     return this.client.getDeploymentList(options)
   }
+
+  async getHPAList (options: IKubernetesRequestOptions) {
+    return this.client.getHPAList(options)
+  }
 }

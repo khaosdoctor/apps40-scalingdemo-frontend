@@ -1,6 +1,8 @@
 import rescue from 'express-rescue'
+import { boom } from '@expresso/errors'
 import { Request, Response, NextFunction } from 'express'
 import { KubernetesService } from '../../../services/KubernetesService'
+import { KubernetesAPIError } from '../../../errors/KubernetesAPIError'
 
 export default function (service: KubernetesService) {
   return [
@@ -12,6 +14,7 @@ export default function (service: KubernetesService) {
         .json(entity)
     }),
     (err: any, _req: Request, _res: Response, next: NextFunction) => {
+      if (err instanceof KubernetesAPIError) next(boom.badGateway(err.message, { code: 'kubernetes_api_error' }))
       next(err)
     }
   ]
