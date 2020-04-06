@@ -12,7 +12,7 @@ memoryUsage: 90
 
 image:
   registry: khaosdoctor
-  name: apps40-backend
+  name: visualization-backend
   tag: v1.0.0
   pullPolicy: IfNotPresent
 
