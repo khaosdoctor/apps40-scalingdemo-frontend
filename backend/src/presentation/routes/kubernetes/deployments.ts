@@ -14,7 +14,7 @@ export default function (service: KubernetesService) {
         .json(entity)
     }),
     (err: any, _req: Request, _res: Response, next: NextFunction) => {
-      if (err instanceof KubernetesAPIError) next(boom.badGateway(err.message, { code: 'kubernetes_api_error' }))
+      if (err instanceof KubernetesAPIError) next(boom.badGateway(err.message, { code: 'kubernetes_api_error', errorObject: err.errorObject }))
       next(err)
     }
   ]
