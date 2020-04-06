@@ -47,7 +47,7 @@ export class KubernetesClient {
 
   async getHPAList (options: IKubernetesRequestOptions): Promise<HorizontalPodAutoscalerList> {
     try {
-      const { data } = await this.client.get<HorizontalPodAutoscalerList>(`/v1/namespaces/${this.accountNamespace}/horizontalpodautoscalers`, { params: options })
+      const { data } = await this.client.get<HorizontalPodAutoscalerList>(`/autoscaling/v1/namespaces/${this.accountNamespace}/horizontalpodautoscalers`, { params: options })
       return data
     } catch (error) {
       throw new KubernetesAPIError(JSON.stringify(error?.response?.data) ?? error.message)
