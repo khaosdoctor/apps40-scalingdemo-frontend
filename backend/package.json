@@ -1,6 +1,6 @@
 {
   "name": "visualization-backend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Backend to the APPS40 GUI",
   "main": "dist/app.js",
   "scripts": {
