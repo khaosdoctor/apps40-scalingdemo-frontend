@@ -38,10 +38,10 @@ export class KubernetesClient {
 
   async getDeploymentList (options: IKubernetesRequestOptions): Promise<DeploymentList> {
     try {
-      const { data } = await this.client.get<DeploymentList>(`/v1/namespaces/${this.accountNamespace}/deployments`, { params: options })
+      const { data } = await this.client.get<DeploymentList>(`/apps/v1/namespaces/${this.accountNamespace}/deployments`, { params: options })
       return data
     } catch (error) {
-      throw new KubernetesAPIError(error?.response?.data ?? error.message)
+      throw new KubernetesAPIError(JSON.stringify(error?.response?.data ?? error.message))
     }
   }
 
