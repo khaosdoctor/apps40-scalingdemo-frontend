@@ -1,4 +1,4 @@
 apiVersion: v1
-description: API gateway
+description: APPS40 Chart info
 name: visualization-frontend
 version: 0.1.1
