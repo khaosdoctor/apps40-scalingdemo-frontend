@@ -13,6 +13,7 @@ set -x
 helm upgrade --install --atomic $PACKAGE_NAME-${NAMESPACE} \
   --set "env=$NAMESPACE" \
   --set "image.tag=$IMAGE_TAG" \
-  --set "ingress.hostname=${FRONTEND_HOSTNAME:-chega.ai}" \
+  --set "ingress.hostname=\"${INGRESS_HOSTNAME}\"" \
+  --set "environment.API_URL=${API_URL}" \
   --namespace $NAMESPACE \
-  $CURRENT_DIR/$PACKAGE_NAME
+  $CURRENT_DIR/${PACKAGE_NAME}

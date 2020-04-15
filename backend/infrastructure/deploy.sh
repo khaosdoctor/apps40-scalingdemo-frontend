@@ -13,5 +13,6 @@ set -x
 helm upgrade --install --atomic ${PACKAGE_NAME}-${NAMESPACE} \
   --set "env=$NAMESPACE" \
   --set "image.tag=$IMAGE_TAG" \
+  --set "ingress.hostname=$INGRESS_HOSTNAME" \
   --namespace $NAMESPACE \
   $CURRENT_DIR/${PACKAGE_NAME}

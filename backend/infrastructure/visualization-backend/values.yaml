@@ -6,15 +6,18 @@ replicaCount: 1
 
 name: visualization-backend
 env: production
-maxReplicas: 10
-cpuUsage: 90
-memoryUsage: 90
 
 image:
   registry: khaosdoctor
   name: visualization-backend
   tag: v1.0.0
   pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+  hostname: localhost
 
 service:
   type: ClusterIP

@@ -1,1 +1,2 @@
-export API_URL=http://localhost
+export API_URL="http://visualization-api.domain.com"
+export INGRESS_HOSTNAME="cluster-info.domain.com"
