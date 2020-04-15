@@ -9,7 +9,6 @@ metadata:
     env: {{ .Values.env }}
   {{- with .Values.ingress.annotations }}
   annotations:
-    kubernetes.io/tls-acme: 'true'
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -21,7 +20,3 @@ spec:
             backend:
               serviceName: {{ .Values.name }}
               servicePort: {{ .Values.service.portName }}
-  tls:
-    - hosts:
-        - {{ .Values.ingress.hostname }}
-      secretName: {{ .Values.name }}-tls-cert

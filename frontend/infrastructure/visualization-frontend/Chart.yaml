@@ -1,4 +1,4 @@
 apiVersion: v1
 description: API gateway
-name: frontend
+name: visualization-frontend
 version: 0.1.0
