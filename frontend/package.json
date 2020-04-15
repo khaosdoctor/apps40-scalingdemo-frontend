@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "node ./bin/www",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.11.0",
+    "compression": "^1.7.4",
     "core-js": "^3.6.4",
-    "vue": "^2.6.11"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "spdy": "^4.0.2",
+    "vue": "^2.6.11",
+    "vue-d3-network": "^0.1.28"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
