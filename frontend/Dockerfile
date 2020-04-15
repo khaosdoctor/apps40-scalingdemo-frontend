@@ -1,23 +1,47 @@
-FROM node:13.0-alpine as production-stage
+############## EXPRESS DEPENDENCIES #################
+FROM node:13-alpine AS express-dependencies
 
-WORKDIR /app
-ARG ENV_API_URL
-ENV API_URL=${ENV_API_URL}
+COPY ["./package.json", "./package-lock.json", "/tmp/app/"]
 
-ENV PORT=80
+RUN cd /tmp/app && npm install --only=prod
 
-COPY ["./package.json", "package-lock.json", "/app/"]
+##################### VUE BUILD #####################
+FROM node:10-alpine AS vue-build
 
-RUN npm i -g @quasar/cli
-RUN npm i --verbose
+## Install dependencies
+COPY ["./package.json", "./package-lock.json", "/tmp/build/"]
 
-## Adding source code
-COPY ["src", "/app/src/"]
-COPY ["src-ssr", "/app/src-ssr/"]
-COPY [".eslintignore", ".eslintrc.js", ".postcssrc.js", ".stylintrc", "babel.config.js", "quasar.conf.js", "/app/"]
+RUN cd /tmp/build && npm install
 
-RUN quasar build -m ssr
+COPY ./src /tmp/build/src
+COPY ./public /tmp/build/public
+
+## Add source code
+COPY ./.browserslistrc \
+  ./package.json \
+  ./package-lock.json \
+  ./.eslintrc.js \
+  ./babel.config.js \
+  /tmp/build/
+
+RUN ls /tmp/build
+
+## Build
+RUN cd /tmp/build && npm run build
+
+################### SERVE ###################
+FROM node:13-alpine
+
+ENV NODE_ENV production
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY ./bin /usr/src/app/bin
+COPY ./package.json ./package-lock.json /usr/src/app/
+COPY --from=vue-build /tmp/build/dist /usr/src/app/dist/
+COPY --from=express-dependencies /tmp/app/node_modules /usr/src/node_modules/
 
 EXPOSE 80
 
-CMD ["node", "dist/ssr/server/index.js"]
+ENTRYPOINT [ "npm", "start" ]

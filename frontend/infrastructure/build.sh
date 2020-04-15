@@ -7,5 +7,5 @@ read -p "Building and publishing $IMAGE_TAG. Press [enter] to continue..."
 
 set -x
 
-docker build --build-arg "ENV_API_URL=$API_URL" $PARENT_DIR -t $IMAGE_TAG
+docker build $PARENT_DIR -t $IMAGE_TAG
 docker push $IMAGE_TAG
