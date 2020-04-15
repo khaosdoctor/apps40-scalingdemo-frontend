@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <hpa-list></hpa-list>
+    <deployment-graph></deployment-graph>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HPAList from './components/HPAList.vue'
+import DeploymentGraph from './components/DeploymentGraph.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'hpa-list': HPAList,
+    'deployment-graph': DeploymentGraph
   }
 }
 </script>
