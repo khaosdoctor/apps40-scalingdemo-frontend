@@ -57,7 +57,7 @@ export default {
           this.links.push({ name: `${podName}_link`, id: `${deploymentName}_${podName}`, sid: deploymentName, tid: podName })
         }
       }
-    }, process.env.VUE_APP_INTERVAL_MS)
+    }, 2000)
   }
 }
 </script>

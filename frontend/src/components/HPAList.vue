@@ -43,7 +43,7 @@ export default {
         replicas: `Cur. ${hpa?.status?.currentReplicas ?? 'No available data'} / Des. ${hpa?.status?.desiredReplicas ?? 'No available data'}`
       }))
       this.isLoading = false
-    }, process.env.VUE_APP_INTERVAL_MS)
+    }, 2000)
   }
 }
 </script>
