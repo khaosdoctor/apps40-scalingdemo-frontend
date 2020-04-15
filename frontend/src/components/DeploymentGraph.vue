@@ -20,7 +20,10 @@ export default {
         force: 5000,
         nodeSize: 40,
         nodeLabels: true,
-        linkWidth: 2
+        linkWidth: 2,
+        size: {
+          h: 1500
+        }
       }
     }
   },
