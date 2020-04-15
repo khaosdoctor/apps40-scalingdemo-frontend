@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+'use strict'
+
+const cors = require('cors')
+const spdy = require('spdy')
+const express = require('express')
+const pck = require('../package.json')
+const compression = require('compression')
+
+const corsOptions = {
+  'origin': '*',
+  'methods': 'GET'
+}
+
+const app = express()
+
+app.use(compression({ threshold: 0 }))
+app.use(cors(corsOptions))
+
+app.get('/ping', (req, res) => {
+  res.status(200).end('Pong!')
+})
+
+app.get('/config.json', (req, res) => {
+  res.status(200)
+    .set('Content-Type', 'application/json')
+    .json({
+      API_URL: process.env.API_URL
+    })
+})
+
+app.use(express.static('./dist/', { maxage: '1d' }))
+
+const options = {
+  spdy: {
+    protocols: ['h2', 'spdy/3.1', 'http/1.1'],
+    plain: true,
+    ssl: false
+  }
+}
+
+spdy.createServer(options, app)
+  .listen(80, (err) => {
+    if (err) {
+      throw new Error(err)
+    }
+    console.log('Frontend is listening on port 80.')
+  })
