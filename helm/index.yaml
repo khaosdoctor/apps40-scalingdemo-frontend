@@ -1,0 +1,37 @@
+apiVersion: v1
+entries:
+  visualization-backend:
+  - apiVersion: v1
+    created: "2020-04-15T11:26:27.62055-03:00"
+    description: APPS40 Backend
+    digest: 8f66e621bed64ddc39cf45259ba198062b25865fb1072206fc5e90eacfc3844a
+    name: visualization-backend
+    urls:
+    - https://lsantos.dev/apps40-scalingdemo-frontend/helm/visualization-backend-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v1
+    created: "2020-04-15T11:26:27.620146-03:00"
+    description: APPS40 Backend
+    digest: 88ae51052d6808714db29684bb01d1065f28e3f0c650011ad6655c88276fb9ff
+    name: visualization-backend
+    urls:
+    - https://lsantos.dev/apps40-scalingdemo-frontend/helm/visualization-backend-0.1.0.tgz
+    version: 0.1.0
+  visualization-frontend:
+  - apiVersion: v1
+    created: "2020-04-15T11:26:27.621287-03:00"
+    description: API gateway
+    digest: 2fd31833de8fc7bf00f1754af3e6fbe2c9e2dd48fb83ff466c2063c393054044
+    name: visualization-frontend
+    urls:
+    - https://lsantos.dev/apps40-scalingdemo-frontend/helm/visualization-frontend-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    created: "2020-04-15T11:26:27.620907-03:00"
+    description: API gateway
+    digest: 61f9762f43040d7d42140d10e03fa3382b59310428548f536c7e6cdd0c817403
+    name: visualization-frontend
+    urls:
+    - https://lsantos.dev/apps40-scalingdemo-frontend/helm/visualization-frontend-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-04-15T11:26:27.619633-03:00"
